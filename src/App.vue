@@ -1,28 +1,78 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <div>
+    <div class='main-container'>
+
+     
+
+  
+    
+      <!-- <films-list :films="films"></films-list>
+      <film-detail :film="selectedFilm"></film-detail> -->
+      <ghibli-header title="Studio Ghibli Information" />
+       <h1>Characters</h1>
+       <label for="character_select">Select a Character</label>
+    <select id="character_select" v-model="selectedCharacter">
+      <option disabled value="">Select a character</option>
+      <option v-for="(character, index) in characters" :key="index" :value="character">{{character.name}}</option>
+    </select>
+
+
+  
+      <character-detail :character="selectedCharacter"></character-detail> 
+    </div>
+  </div> 
+  
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import FilmDetail from './components/FilmDetail.vue';
+import FilmsList from './components/FilmsList.vue';
+import GhibliHeader from './components/GhibliHeader.vue';
+import CharacterDetail from './components/CharacterDetail.vue';
+import CharactersList from './components/CharactersList.vue';
+import {eventBus} from './main.js'
+
+
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: 'app',
+  data() {
+    return {
+      characters: [],
+      // films: [],
+      selectedCharacter: null,
+      selectedFilm:null
+
+    }
+  },
+  mounted(){
+    fetch('https://ghibliapi.herokuapp.com/people')
+    .then(results => results.json())
+    .then(data => this.characters = data)
+    // .then(filmData => this.films = filmData)
+
+    eventBus.$on('character-selected', character => (this.selectedCharacter = character));
+    eventBus.$on('film-selected', film => (this.selectedFilm = film));
+  },
+  components:{
+    "characters-list": CharactersList,
+    "character-detail": CharacterDetail,
+    "ghibli-header": GhibliHeader,
+    "films-list": FilmsList,
+    "film-detail": FilmDetail
   }
+
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body{
+  font-family: futura;
+
+  background:lightskyblue; 
+ 
+   
 }
+
+
 </style>
