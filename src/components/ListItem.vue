@@ -1,7 +1,7 @@
 <template>
   <div>
       <h3>Film List Item</h3>
-      <li v-on:click="handleClick">{{ film.title }}</li>
+      <li>{{ film.title }}</li>
   </div>
 </template>
 

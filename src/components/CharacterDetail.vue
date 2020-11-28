@@ -4,8 +4,13 @@
       <p>Age:{{ character.age}}</p>
       <p>Hair Colour:{{ character.hair_color}}</p>
         Appears in:
-      <ul>
-        <li v-for="film in films" :film="film" :key="film.id">{{ film.title}}</li></ul>
+      <ul> 
+        <li v-for="film in films" :film="film" :key="film.id">
+          <p>Title:{{ film.title}}</p>
+          <p>Director:{{ film.director }}</p>
+          <p>Release Date:{{ film.release_date}}</p> </li></ul>
+
+
       </div>
   </div>
 </template>
@@ -15,6 +20,8 @@ import FilmsList from './FilmsList.vue'
 export default {
     name: 'character-detail',
     props: ['character'],
+    
+    
     data(){
       return {
         films: []
@@ -22,7 +29,8 @@ export default {
     },
     components: {
       'films-list': FilmsList
-    },
+    }
+    ,
     mounted() {
       this.getFilms()
     },
