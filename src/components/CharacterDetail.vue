@@ -7,7 +7,7 @@
       <ul> 
         <li v-for="film in films" :film="film" :key="film.id">
           <p>Title:{{ film.title}}</p>
-          <button v-on:click="handleClick(selectedFilm)" if="film-selected" >Add To Watch List</button>
+          <button v-on:click="handleClick(film)">Add To Watch List</button>
           <p>Director:{{ film.director }}</p>
           <p>Release Date:{{ film.release_date}}</p> 
           </li></ul>
@@ -19,6 +19,8 @@
 
 <script>
 import FilmsList from './FilmsList.vue'
+import { eventBus } from "@/main.js";
+
 export default {
     name: 'character-detail',
     props: ['character'],
@@ -56,8 +58,8 @@ export default {
         })
       },
       
-        handleClick(){
-          eventBus.$emit('film-selected', this.selectedFilm)
+        handleClick: function(film) {
+          eventBus.$emit('film-selected', this.film)
         }
       }
 

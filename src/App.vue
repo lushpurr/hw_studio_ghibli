@@ -45,7 +45,7 @@ export default {
     .then(data => this.characters = data)
 
     eventBus.$on('character-selected', character => (this.selectedCharacter = character));
-    eventBus.$on('film-selected', film => (this.selectedFilm = film));
+    eventBus.$on('film-selected', film => this.addToWatchList(film));
   },
   components:{
     "characters-list": CharactersList,
@@ -55,8 +55,8 @@ export default {
  
   },
   methods:{
-        addToWatchList: function(selectedFilm) {
-        this.watchList.push(this.selectedFilm)
+        addToWatchList: function(film) {
+        this.watchList.push(film)
       }
 
 }}
