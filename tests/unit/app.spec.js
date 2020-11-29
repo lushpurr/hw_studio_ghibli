@@ -17,4 +17,16 @@ describe('App', () => {
     expect(wrapper.vm.characters).toHaveLength(2);
   });
 
+  it('should have a name', () => {
+    const expected = "Dola"
+
+    expect(wrapper.vm.characters[0].name).toMatch(expected);
+  });
+
+  it('should have a film array', () => {
+    const expected = ["https://ghibliapi.herokuapp.com/films/2baf70d1-42bb-4437-b551-e5fed5a87abe"]
+      
+    expect(wrapper.vm.characters[0].films).toContain("https://ghibliapi.herokuapp.com/films/2baf70d1-42bb-4437-b551-e5fed5a87abe")
+  });
+
 })

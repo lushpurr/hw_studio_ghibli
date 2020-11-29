@@ -7,8 +7,10 @@
       <ul> 
         <li v-for="film in films" :film="film" :key="film.id">
           <p>Title:{{ film.title}}</p>
+          <button v-on:click="handleClick(selectedFilm)" if="film-selected" >Add To Watch List</button>
           <p>Director:{{ film.director }}</p>
-          <p>Release Date:{{ film.release_date}}</p> </li></ul>
+          <p>Release Date:{{ film.release_date}}</p> 
+          </li></ul>
 
 
       </div>
@@ -33,6 +35,8 @@ export default {
     ,
     mounted() {
       this.getFilms()
+
+
     },
     watch: {
       character: function(){
@@ -50,10 +54,14 @@ export default {
           this.films = data;
           console.log(this.films);
         })
+      },
+      
+        handleClick(){
+          eventBus.$emit('film-selected', this.selectedFilm)
+        }
       }
-    }
 
-}
+    }
 </script>
 
 <style>

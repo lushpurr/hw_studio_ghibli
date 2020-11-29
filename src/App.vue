@@ -11,6 +11,7 @@
         </select>
 
         <character-detail :character="selectedCharacter"></character-detail> 
+        <watch-list></watch-list>
     </div>
   </div> 
   
@@ -22,6 +23,7 @@
 import GhibliHeader from './components/GhibliHeader.vue';
 import CharacterDetail from './components/CharacterDetail.vue';
 import CharactersList from './components/CharactersList.vue';
+import WatchList from './components/WatchList.vue';
 import {eventBus} from './main.js'
 
 
@@ -31,6 +33,8 @@ export default {
   data() {
     return {
       characters: [],
+      watchList: [],
+      selectedFilm: null,
       selectedCharacter: null,
 
     }
@@ -41,16 +45,21 @@ export default {
     .then(data => this.characters = data)
 
     eventBus.$on('character-selected', character => (this.selectedCharacter = character));
+    eventBus.$on('film-selected', film => (this.selectedFilm = film));
   },
   components:{
     "characters-list": CharactersList,
     "character-detail": CharacterDetail,
     "ghibli-header": GhibliHeader,
-    // "films-list": FilmsList,
-    // "film-detail": FilmDetail
-  }
+    "watch-list": WatchList
+ 
+  },
+  methods:{
+        addToWatchList: function(selectedFilm) {
+        this.watchList.push(this.selectedFilm)
+      }
 
-}
+}}
 </script>
 
 <style>
