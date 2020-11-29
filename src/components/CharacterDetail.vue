@@ -1,5 +1,5 @@
 <template>
-  <div v-if="character" id="character-detail">
+  <div v-if="character" id="selected_character">
       <h3>Name:{{ character.name }}</h3>
       <p>Age:{{ character.age}}</p>
       <p>Hair Colour:{{ character.hair_color}}</p>

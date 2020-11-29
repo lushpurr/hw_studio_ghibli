@@ -11,7 +11,7 @@
         </select>
 
         <character-detail :character="selectedCharacter"></character-detail> 
-        <watch-list></watch-list>
+        <watch-list :watchList="watchList"></watch-list>
     </div>
   </div> 
   
